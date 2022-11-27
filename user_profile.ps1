@@ -1,5 +1,9 @@
 [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
+
+
+
+
 #Prompt
 Import-Module posh-git
 
@@ -10,7 +14,7 @@ oh-my-posh --init --shell pwsh --config "$env:POSH_THEMES_PATH\capr4n.omp.json" 
 
 
 Import-Module -Name Terminal-Icons
-
+Import-Module -Name z -Force
 # PSReadLine
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
@@ -31,9 +35,23 @@ Set-Alias grep findstr
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 
+
+
+
+
+#PWD
+function pwdAutoCopy {
+	Get-Location; (Get-Location).path | scb;
+
+}
+
+Set-Alias pwd pwdAutoCopy
+
+
+
+
 # Utilities
 function which ($command) {
   Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
-
